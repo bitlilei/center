@@ -83,6 +83,7 @@ html[data-lang="en"] .lang-zh { display: none !important; }
 .float-label.a { top: 40px; right: 22px; }
 .float-label.b { bottom: 55px; left: 0; }
 .float-label.c { bottom: 22px; right: 55px; }
+.float-label.d { top: 70px; left: 35px; }
 
 .page-hero { padding: 88px 0 68px; color: white; background: linear-gradient(135deg,var(--navy),#102b49); }
 .page-hero .eyebrow { margin-bottom: 13px; }
