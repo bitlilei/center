@@ -13,10 +13,10 @@
       langButton.setAttribute('aria-label', next === 'zh' ? '切换到英文' : 'Switch to Chinese');
       langButton.setAttribute('title', next === 'zh' ? '切换到英文' : 'Switch to Chinese');
     }
-    localStorage.setItem('siteLang', next);
+    sessionStorage.setItem('siteLang', next);
   }
 
-  setLanguage(localStorage.getItem('siteLang') || 'zh');
+  setLanguage(sessionStorage.getItem('siteLang') || 'zh');
   if (langButton) langButton.addEventListener('click', () => setLanguage(root.dataset.lang === 'zh' ? 'en' : 'zh'));
   if (menuButton && nav) {
     menuButton.addEventListener('click', () => {
