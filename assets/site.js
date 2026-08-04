@@ -16,7 +16,7 @@
     sessionStorage.setItem('siteLang', next);
   }
 
-  setLanguage(sessionStorage.getItem('siteLang') || 'zh');
+  setLanguage(sessionStorage.getItem('siteLang') || 'en');
   if (langButton) langButton.addEventListener('click', () => setLanguage(root.dataset.lang === 'zh' ? 'en' : 'zh'));
   if (menuButton && nav) {
     menuButton.addEventListener('click', () => {
