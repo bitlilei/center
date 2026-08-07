@@ -1,0 +1,236 @@
+
+<!doctype html>
+<html lang="zh-CN">
+
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light" />
+<title>Spatial Intelligence — Research Framework</title>
+<style>
+:root{
+  --bg:#f3f6fb;--paper:#fff;--ink:#121a2a;--muted:#607087;--line:#dce4ef;
+  --navy:#07142d;--blue:#2d63d9;--blue2:#71b7ff;--cyan:#18a6b8;
+  --violet:#7456d8;--orange:#ef7a2d;--green:#26876b;
+  --soft-blue:#edf4ff;--soft-violet:#f2efff;--soft-orange:#fff3e9;
+  --shadow:0 18px 60px rgba(29,51,89,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.72 Inter,"PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif}
+a{color:inherit}
+.wrap{max-width:1180px;margin:auto;padding:0 24px}
+.hero{position:relative;overflow:hidden;color:white;padding:78px 0 72px;background:
+ radial-gradient(circle at 76% 20%,rgba(61,191,224,.28),transparent 26%),
+ radial-gradient(circle at 93% 82%,rgba(126,80,229,.22),transparent 28%),
+ linear-gradient(135deg,#071329 0%,#102b58 58%,#163d75 100%)}
+.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:40px 40px;mask-image:linear-gradient(to right,transparent 0%,#000 52%,#000 100%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.2fr .8fr;gap:34px;align-items:center}
+.eyebrow{font-size:12px;letter-spacing:.16em;color:#90d4ff;font-weight:800}
+.hero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(42px,6vw,72px);line-height:1.02;margin:12px 0 14px;letter-spacing:-.03em}
+.hero h1 span{display:block;color:#a8dcff;font-size:.55em;font-family:Inter,"PingFang SC",sans-serif;letter-spacing:0;margin-top:12px}
+.hero p{max-width:760px;margin:0;color:#e8f1ff;font-size:18px}
+.tags{display:flex;gap:9px;flex-wrap:wrap;margin-top:24px}
+.tag{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border:1px solid rgba(255,255,255,.26);border-radius:999px;background:rgba(255,255,255,.08);font-size:12px;backdrop-filter:blur(10px)}
+.hero-art{min-height:330px;display:grid;place-items:center}
+.hero-art svg{width:100%;max-width:440px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.25))}
+nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+nav .wrap{display:flex;align-items:center;gap:22px;overflow:auto;padding-top:12px;padding-bottom:12px}
+nav a{text-decoration:none;white-space:nowrap;font-size:13px;color:#506078;font-weight:700}
+nav a:hover{color:var(--blue)}
+main{padding:48px 0 80px}
+section{margin-bottom:54px;scroll-margin-top:80px}
+.section-card{background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+.section-inner{padding:30px}
+.label{font-size:12px;letter-spacing:.13em;color:var(--blue);font-weight:900}
+.title{font-size:31px;line-height:1.25;margin:5px 0 12px;letter-spacing:-.01em}
+.subtitle{font-size:16px;color:var(--muted);margin-top:-4px}
+.lead{font-size:17px;color:var(--muted);max-width:950px}
+.thesis{margin-top:18px;border:1px solid #cddcff;background:linear-gradient(135deg,#f4f8ff,#fff);border-radius:15px;padding:17px 18px;font-size:17px}
+.thesis b{color:var(--blue)}
+.vision-flow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:11px;align-items:center;margin-top:22px}
+.flow-node{position:relative;padding:18px 15px;border:1px solid var(--line);border-radius:15px;background:#fff;min-height:116px;display:flex;flex-direction:column;justify-content:center}
+.flow-node .icon{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:var(--soft-blue);color:var(--blue);margin-bottom:9px}
+.flow-node strong{font-size:15px}.flow-node small{color:var(--muted)}
+.arrow{font-size:27px;text-align:center;color:#7aa1df;font-weight:900}
+.idea{position:relative}
+.idea:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--accent)}
+.idea .label,.idea .title,.idea .q b{color:var(--accent)}
+.idea-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+.number{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:var(--soft);color:var(--accent);font-weight:900;font-size:20px;flex:0 0 auto}
+.idea-title-wrap{flex:1}
+.q{margin:18px 0 22px;border:1px solid color-mix(in srgb,var(--accent) 32%, white);background:var(--soft);border-radius:14px;padding:14px 16px;color:#41516b}
+.arch{border-radius:18px;padding:20px;background:linear-gradient(135deg,#0c1934,#172d55);color:white;overflow:auto}
+.pipeline{min-width:980px;display:grid;grid-template-columns:1fr 34px 1fr 34px 1fr 34px 1fr 34px 1fr;gap:8px;align-items:stretch}
+.pipeline.six{grid-template-columns:1fr 30px 1fr 30px 1fr 30px 1fr 30px 1.2fr 30px 1fr;min-width:1120px}
+.pnode{border:1px solid rgba(255,255,255,.17);border-radius:14px;padding:15px;background:rgba(255,255,255,.08);display:flex;flex-direction:column;justify-content:center;min-height:132px}
+.pnode .mini{display:inline-flex;align-items:center;gap:8px;color:#9fd6ff;font-size:12px;font-weight:800;margin-bottom:7px}
+.pnode strong{font-size:15px}.pnode small{color:#c9d7ee;margin-top:5px}
+.parrow{display:grid;place-items:center;color:#8db5ff;font-size:25px;font-weight:900}
+.idea-grid{display:grid;grid-template-columns:1.55fr .75fr;gap:16px;margin-top:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:19px}
+.card h3{margin:0 0 10px;font-size:17px}
+ul.clean{margin:0;padding-left:19px;color:#4d5e76}
+ul.clean li{margin:5px 0}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:7px 11px;border-radius:999px;background:var(--soft);border:1px solid color-mix(in srgb,var(--accent) 25%, white);color:var(--accent);font-size:12px;font-weight:800}
+.target{display:flex;align-items:center;gap:10px;margin-top:14px;padding:11px 13px;border:1px solid color-mix(in srgb,var(--accent) 35%, white);border-radius:13px;background:var(--soft);color:var(--accent);font-weight:850}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.metric{padding:12px;border-radius:13px;background:#f8fafc;border:1px solid var(--line)}
+.metric b{display:block;font-size:13px}.metric span{font-size:12px;color:var(--muted)}
+.modules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:18px}
+.module{border-top:4px solid var(--accent);background:#fff;border-radius:15px;border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:17px}
+.module .mnum{font-weight:900;color:var(--accent);font-size:12px;letter-spacing:.08em}.module h3{font-size:15px;margin:5px 0 7px}.module p{margin:0;color:var(--muted);font-size:13px}
+.tablebox{overflow:auto;border:1px solid var(--line);border-radius:16px;margin-top:18px}
+table{border-collapse:collapse;width:100%;min-width:860px;background:white}
+th,td{padding:14px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#eaf1fb;color:#41516b;font-size:12px;letter-spacing:.04em}
+tr:last-child td{border-bottom:none}
+.callout{margin-top:17px;border-radius:15px;padding:17px 18px;background:linear-gradient(135deg,#eef7ff,#f7f4ff);border:1px solid #cbdcf3;font-size:16px}
+.sources{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.source{border-radius:15px;border:1px solid var(--line);background:white;padding:17px}
+.source b{display:block}.source span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+.footer{padding:28px 0 8px;text-align:center;color:#6f7e91;font-size:13px}
+[data-reveal]{opacity:0;transform:translateY(12px);transition:.5s ease}
+[data-reveal].show{opacity:1;transform:none}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-art{min-height:240px}.vision-flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.idea-grid,.sources{grid-template-columns:1fr}.modules{grid-template-columns:1fr 1fr}.metrics{grid-template-columns:1fr}.section-inner{padding:22px}.hero{padding:56px 0}.title{font-size:27px}}
+@media(max-width:620px){.modules{grid-template-columns:1fr}.hero h1{font-size:42px}.wrap{padding:0 16px}}
+@media print{nav{display:none}body{background:white}.section-card{box-shadow:none;break-inside:avoid}.hero{padding:38px 0}.hero-art{display:none}[data-reveal]{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">SPATIAL INTELLIGENCE RESEARCH FRAMEWORK</div>
+      <h1>Spatial Intelligence<span>Generative, Controllable and Human-Centric Spatial Intelligence</span></h1>
+      <p>围绕建筑空间生成、可控 3D 空间生成，以及空间内人的行为理解与生成，构建从空间表征、空间建模到人—空间交互的系统性科研体系。</p>
+      <div class="tags">
+        <span class="tag">⌂ Architectural Generation</span><span class="tag">◇ 3D World Model</span><span class="tag">◎ Behavior Intelligence</span><span class="tag">▦ Spatial Tokens</span><span class="tag">◉ Human-Centric AI</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-label="空间智能示意图">
+      <svg viewBox="0 0 520 380" role="img">
+        <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#58c9ff"/><stop offset="1" stop-color="#8a6dff"/></linearGradient></defs>
+        <g fill="none" stroke="url(#g)" stroke-width="2" opacity=".9">
+          <path d="M70 255 260 145 445 250 260 360Z"/><path d="M260 145V360M70 255l190 105M445 250 260 360" opacity=".5"/>
+          <path d="M126 232v-90l110-62 108 64v103l-108 65-110-64Z"/><path d="M236 80v232M126 142l110 63 108-61M126 248l110-43 108 42"/>
+          <path d="M166 164v57l53 30v-58Z"/><path d="M257 167v70l52-30v-69Z"/><path d="M356 210v-98l55 32v98Z"/>
+          <circle cx="209" cy="171" r="8" fill="#7ddcff"/><path d="M209 179v35m-18 20 18-20 19 20m-23-36-18 14m22-14 18 13"/>
+          <circle cx="311" cy="226" r="7" fill="#9d83ff"/><path d="M311 233v30m-16 17 16-17 16 17m-20-33-13 10m17-10 13 10"/>
+          <path d="M82 113c35 11 52 28 64 54M398 80c-32 14-47 35-55 58" stroke-dasharray="6 8"/>
+          <circle cx="82" cy="113" r="4" fill="#70d6ff"/><circle cx="398" cy="80" r="4" fill="#8f74ff"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+<nav><div class="wrap"><a href="#vision">研究愿景</a><a href="#idea1">方向一 · 建筑空间生成</a><a href="#idea2">方向二 · 可控 3D 空间</a><a href="#idea3">方向三 · 空间行为智能</a><a href="#roadmap">协同研究框架</a><a href="#basis">研究基础</a></div></nav>
+<main class="wrap">
+<section id="vision" data-reveal>
+  <div class="section-card"><div class="section-inner">
+    <div class="label">01 · RESEARCH VISION</div><h2 class="title">从空间生成到行为智能的统一空间智能框架</h2>
+    <p class="lead">实验室不是并列开展三个孤立任务，而是逐步建立一套“空间表示—空间生成—空间交互—行为反馈”的基础模型体系。</p>
+    <div class="thesis"><b>核心主线：</b> Space Generation → Controllable 3D Space → Behavior Understanding &amp; Generation → Spatial Intelligence Foundation Model</div>
+    <div class="vision-flow">
+      <div class="flow-node"><div class="icon">⌂</div><strong>建筑空间生成</strong><small>Spatial Grammar</small></div><div class="arrow">→</div>
+      <div class="flow-node"><div class="icon">◇</div><strong>可控 3D 空间</strong><small>Semantic World Model</small></div><div class="arrow">→</div>
+      <div class="flow-node"><div class="icon">◎</div><strong>行为理解与生成</strong><small>Behavior Agent</small></div><div class="arrow">→</div>
+      <div class="flow-node"><div class="icon">↻</div><strong>闭环优化设计</strong><small>Human-Centric Design</small></div>
+    </div>
+  </div></div>
+</section>
+
+<section id="idea1" class="idea" style="--accent:var(--blue);--soft:var(--soft-blue)" data-reveal>
+  <div class="section-card"><div class="section-inner">
+    <div class="idea-head"><div class="number">01</div><div class="idea-title-wrap"><div class="label">02 · RESEARCH DIRECTION 1</div><h2 class="title">SpaceGen：建筑空间的生成</h2><div class="subtitle">Learning Spatial Language Models for Generative Architectural Design</div></div></div>
+    <div class="q"><b>研究问题：</b>AI 能否学习建筑空间中的隐含语法，并在给定条件下生成合理、可评价、可优化的建筑平面？</div>
+    <div class="arch"><div class="pipeline">
+      <div class="pnode"><span class="mini">INPUT</span><strong>住宅样本 / 平面图 / 属性数据</strong><small>真实住宅类型、房间、朝向、年代、结构与环境信息</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">REPRESENTATION</span><strong>Spatial Tokenization</strong><small>房间、邻接、朝向、尺度、流线与类型学 token</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">GENERATION</span><strong>Conditional Plan Generator</strong><small>在面积、家庭结构、朝向与规范条件下生成候选平面</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">FEEDBACK</span><strong>Thermal-Humidity Evaluator</strong><small>利用实测与模拟建立热湿性能反馈评价器</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">OUTPUT</span><strong>Optimized Floor Plans</strong><small>空间合理性、性能与可实施性综合筛选</small></div>
+    </div></div>
+    <div class="idea-grid">
+      <div class="card"><h3>核心贡献</h3><ul class="clean"><li>将农村住宅的空间规律转化为可学习、可生成的空间语言。</li><li>在平面生成过程中嵌入热湿性能反馈，而非生成后被动评价。</li><li>形成面向真实住宅样本、可解释且可约束的建筑生成模型。</li></ul>
+        <div class="metrics"><div class="metric"><b>生成质量</b><span>拓扑有效率、规范符合率、空间多样性</span></div><div class="metric"><b>性能收益</b><span>热舒适、湿度风险、能耗代理指标</span></div><div class="metric"><b>可解释性</b><span>token 贡献、约束满足、案例可追溯</span></div></div>
+      </div>
+      <div class="card"><h3>关键模块</h3><div class="chips"><span class="chip">Plan Graph</span><span class="chip">Spatial Tokens</span><span class="chip">Conditional Transformer</span><span class="chip">Performance Critic</span><span class="chip">Pareto Selection</span></div><div class="target">◎ 研究重点：空间语言、条件生成与性能反馈</div></div>
+    </div>
+  </div></div>
+</section>
+
+<section id="idea2" class="idea" style="--accent:var(--violet);--soft:var(--soft-violet)" data-reveal>
+  <div class="section-card"><div class="section-inner">
+    <div class="idea-head"><div class="number">02</div><div class="idea-title-wrap"><div class="label">03 · RESEARCH DIRECTION 2</div><h2 class="title">3DSpaceAgent：可控的 3D 空间生成</h2><div class="subtitle">Controllable 3D Spatial Generation with Semantic World Models</div></div></div>
+    <div class="q"><b>研究问题：</b>AI 能否基于语义约束与用户意图，生成、编辑并交互式控制 3D 空间，而不仅仅是生成静态视觉结果？</div>
+    <div class="arch"><div class="pipeline six">
+      <div class="pnode"><span class="mini">INTENT</span><strong>User Intent / Prompt</strong><small>空间用途、对象、关系、风格、性能与人群需求</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">PARSING</span><strong>Scene Parsing</strong><small>对象、区域、关系、可通行性与建筑语义解析</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">WORLD</span><strong>3D Gaussian World Model</strong><small>显式、可渲染、可直接操控的语义 3D 表示</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">GROUNDING</span><strong>Open-Vocabulary Grounding &amp; ROI</strong><small>将文本意图定位到具体对象与空间区域</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">EDITING</span><strong>Editable Operations</strong><small>Add / Move / Recolor / Replace / Remove / Relayout</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">OUTPUT</span><strong>Controllable 3D Scene</strong><small>可解释、可编辑、可迭代的空间结果</small></div>
+    </div></div>
+    <div class="idea-grid">
+      <div class="card"><h3>核心贡献</h3><ul class="clean"><li>从 text-to-3D 升级为 intent-to-spatial-world：理解空间目的，而非只生成视觉外观。</li><li>在统一 3D 表示中完成 grounding、生成与编辑，减少 2D—3D 反复投影。</li><li>将对象级编辑扩展到空间关系、建筑布局、可达性与人群需求控制。</li></ul>
+        <div class="modules"><div class="module"><div class="mnum">N1</div><h3>Semantic Gaussian Scene</h3><p>显式语义 3D 表示与快速渲染。</p></div><div class="module"><div class="mnum">N2</div><h3>Spatial Relation Grounding</h3><p>理解 left / between / near / accessible 等关系。</p></div><div class="module"><div class="mnum">N3</div><h3>Constraint-Aware Editing</h3><p>编辑后保持结构合理、碰撞安全与可通行。</p></div><div class="module"><div class="mnum">N4</div><h3>Interactive Agent Loop</h3><p>用户反馈驱动多轮空间修改。</p></div></div>
+      </div>
+      <div class="card"><h3>典型能力</h3><div class="chips"><span class="chip">空间关系控制</span><span class="chip">对象级编辑</span><span class="chip">布局重组</span><span class="chip">可访问性优化</span><span class="chip">实时交互修改</span><span class="chip">多轮指令修正</span></div><div class="target">◎ 研究重点：语义 3D 表征、空间控制与交互编辑</div></div>
+    </div>
+  </div></div>
+</section>
+
+<section id="idea3" class="idea" style="--accent:var(--orange);--soft:var(--soft-orange)" data-reveal>
+  <div class="section-card"><div class="section-inner">
+    <div class="idea-head"><div class="number">03</div><div class="idea-title-wrap"><div class="label">04 · RESEARCH DIRECTION 3</div><h2 class="title">BehaviorSpace：空间内人的行为理解与生成</h2><div class="subtitle">Human Behavior Understanding and Generation in Intelligent Environments</div></div></div>
+    <div class="q"><b>研究问题：</b>空间不仅是几何结构，更承载人的活动。AI 能否在 3D 空间中理解人的动作、预测行为轨迹，并生成合理的人—空间交互过程？</div>
+    <div class="arch"><div class="pipeline six">
+      <div class="pnode"><span class="mini">MULTIMODAL INPUT</span><strong>3D Space + Video / Motion + Language</strong><small>空间语义、人体动作、任务描述与环境状态</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">AGENT</span><strong>Planner / Executor / Verifier</strong><small>分解复杂行为问题、调用专用模块并验证结果</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">UNDERSTAND</span><strong>Behavior Understanding</strong><small>动作、目标、意图、人与对象交互及使用模式</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">FORECAST</span><strong>Trajectory Forecasting</strong><small>预测下一动作、移动轨迹、停留区域与冲突风险</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">GENERATE</span><strong>Behavior Generation</strong><small>在空间约束和任务条件下生成合理动作序列</small></div><div class="parrow">→</div>
+      <div class="pnode"><span class="mini">CLOSE LOOP</span><strong>Space Redesign Loop</strong><small>用行为反馈反向评价并优化空间设计</small></div>
+    </div></div>
+    <div class="idea-grid">
+      <div class="card"><h3>核心贡献</h3><ul class="clean"><li>构建空间条件下的人类行为模型，将动作理解从“人物本身”扩展到“人—物—空间”。</li><li>联合行为理解、轨迹预测与行为生成，支持多视角、多任务分析。</li><li>形成“生成空间—模拟行为—发现问题—修改空间”的闭环。</li></ul>
+        <div class="metrics"><div class="metric"><b>理解</b><span>动作识别、意图推断、交互问答</span></div><div class="metric"><b>预测</b><span>轨迹误差、下一动作准确率、风险预警</span></div><div class="metric"><b>生成</b><span>物理合理性、空间约束、任务完成率</span></div></div>
+      </div>
+      <div class="card"><h3>输出</h3><div class="chips"><span class="chip">行为识别</span><span class="chip">轨迹预测</span><span class="chip">空间使用模式</span><span class="chip">风险诊断</span><span class="chip">行为生成</span><span class="chip">行为反馈设计</span></div><div class="target">◎ 研究重点：行为理解、轨迹预测与行为生成</div></div>
+    </div>
+  </div></div>
+</section>
+
+<section id="roadmap" data-reveal>
+  <div class="section-card"><div class="section-inner">
+    <div class="label">05 · INTEGRATED RESEARCH FRAMEWORK</div><h2 class="title">三大研究方向共同构成 Spatial Intelligence 研究体系</h2>
+    <div class="tablebox"><table><thead><tr><th>研究方向</th><th>输入</th><th>核心研究</th><th>主要输出</th><th>体系作用</th></tr></thead><tbody>
+      <tr><td><b style="color:var(--blue)">建筑空间生成</b></td><td>Plan / Image / Attributes / Climate</td><td>Spatial Tokens + Conditional Plan Generation + Performance Feedback</td><td>可约束、可评价、可优化的建筑空间方案</td><td>建立空间智能的生成基础</td></tr>
+      <tr><td><b style="color:var(--violet)">可控 3D 空间生成</b></td><td>Prompt / 3D Scene / Spatial Constraints</td><td>Semantic 3D World Model + Grounding + Controllable Editing</td><td>可解释、可编辑、可交互的三维空间</td><td>建立空间智能的世界模型与操作能力</td></tr>
+      <tr><td><b style="color:var(--orange)">空间行为理解与生成</b></td><td>3D Space / Motion / Video / Language</td><td>Multimodal Behavior Understanding + Forecasting + Generation</td><td>行为识别、轨迹预测、行为生成与空间反馈</td><td>建立空间智能的人—空间交互能力</td></tr>
+    </tbody></table></div>
+    <div class="callout"><b>Long-term Vision：</b>让 AI 不仅能够生成空间，还能够理解空间结构、控制三维空间，并建模人在空间中的行为，最终形成面向真实建筑环境与具身智能的空间智能方法体系。</div>
+  </div></div>
+</section>
+
+<section id="basis" data-reveal>
+  <div class="section-card"><div class="section-inner">
+    <div class="label">06 · RESEARCH BASIS</div><h2 class="title">三大研究方向的现有研究基础</h2>
+    <p class="lead">以下内容对应现有项目基础与相关研究，可作为三大方向持续开展科研工作的技术起点。</p>
+    <div class="sources">
+      <div class="source"><b>农村住宅生成与空间 Token</b><span>真实住宅样本、平面图、属性数据、热湿反馈，以及图像—文本—类型学 token 对齐，为 SpaceGen 提供数据与问题基础。</span></div>
+      <div class="source"><b>3DSceneEditor</b><span>基于 3D Gaussian Splatting 的开放词汇 grounding、ROI 定位与对象添加、移动、重着色、替换和删除，为 3DSpaceAgent 提供 3D-only 编辑范式。</span></div>
+      <div class="source"><b>ChatMotion</b><span>Planner—Executor—Verifier 与 MotionCore 的多智能体分析框架，为 BehaviorSpace 的多模态行为理解、工具调用和结果验证提供架构基础。</span></div>
+    </div>
+  </div></div>
+</section>
+<div class="footer">Spatial Intelligence · Integrated Research Framework</div>
+</main>
+<script>
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.08});
+document.querySelectorAll('[data-reveal]').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
